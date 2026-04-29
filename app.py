@@ -24,10 +24,11 @@ if st.button("Predict"):
         img = canvas.image_data
 
         img = cv2.cvtColor(img.astype('uint8'), cv2.COLOR_BGR2GRAY)
-        img = cv2.resize(img, (8, 8))   # IMPORTANT for sklearn digits
-        img = img / 16.0                # normalize (digits dataset)
+        img = cv2.resize(img, (28, 28))
+        img = 255 - img
+        img = img / 255.0
 
-        img = img.reshape(1, -1)
+        img = img.reshape(1, -1)   # IMPORTANT for SVM/KNN
 
         pred = model.predict(img)
 
